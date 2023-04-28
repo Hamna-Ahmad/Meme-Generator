@@ -1,0 +1,167 @@
+* {
+  box-sizing: border-box;
+}
+
+/* =======================
+       LAYOUT
+======================= */
+body {
+  font-family: "Karla", sans-serif;
+  margin: 0;
+}
+
+main {
+  padding: 36px;
+  min-width: 500px;
+  max-width:900px;
+  margin:0 auto;
+}
+
+/* Header Component */
+.header {
+  display: flex;
+  align-items: center;
+  height: 65px;
+  background: #fc00ff;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #00dbde, #fc00ff);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #00dbde, #fc00ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  color: white;
+  padding: 20px;
+}
+
+.header--image {
+  height: 100%;
+  margin-right: 6px;
+}
+
+.header--project {
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+/* Heading Glitch */
+.stack {
+display: grid;
+grid-template-columns: 1fr;
+margin-right: auto;
+}
+
+.stack span {
+font-weight: bold;
+grid-row-start: 1;
+grid-column-start: 1;
+font-size: 1.24rem;
+--stack-height: calc(100% / var(--stacks) - 1px);
+--inverse-index: calc(calc(var(--stacks) - 1) - var(--index));
+--clip-top: calc(var(--stack-height) * var(--index));
+--clip-bottom: calc(var(--stack-height) * var(--inverse-index));
+clip-path: inset(var(--clip-top) 0 var(--clip-bottom) 0);
+animation: stack 340ms cubic-bezier(.46,.29,0,1.24) 1 backwards calc(var(--index) * 120ms), glitch 2s ease infinite 2s alternate-reverse;
+}
+
+.stack span:nth-child(odd) { --glitch-translate: 8px; }
+.stack span:nth-child(even) { --glitch-translate: -8px; }
+
+@keyframes stack {
+0% {
+  opacity: 0;
+  transform: translateX(-50%);
+  text-shadow: -2px 3px 0 #fc00ff, 2px -3px 0 #00dbde;
+};
+60% {
+  opacity: 0.5;
+  transform: translateX(50%);
+}
+80% {
+  transform: none;
+  opacity: 1;
+  text-shadow: 2px -3px 0 #fc00ff, -2px 3px 0 #00dbde;
+}
+100% {
+  text-shadow: none;
+}
+}
+
+@keyframes glitch {
+0% {
+  text-shadow: -2px 3px 0 #fc00ff, 2px -3px 0 #00dbde;
+  transform: translate(var(--glitch-translate));
+}
+2% {
+  text-shadow: 2px -3px 0 #fc00ff, -2px 3px 0 #00dbde;
+}
+4%, 100% {  text-shadow: none; transform: none; }
+}
+
+/* Meme Component */
+.form {
+  display: grid;
+  grid-template: 40px 40px / 1fr 1fr;
+  gap: 17px;
+  margin-bottom: 17px;
+}
+
+.form--input {
+  font-family: "Karla", sans-serif;
+  border-radius: 5px;
+  border: 1px solid #00dbde;
+  text-indent: 5px;
+}
+
+.form--input:focus {
+  border: 1px solid #fc00ff;
+}
+
+.form--button {
+  grid-column: 1 / -1;
+  font-family: "Karla", sans-serif;
+  border-radius: 5px;
+  background: #fc00ff;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #00dbde, #fc00ff);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #00dbde, #fc00ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.meme {
+  position: relative;
+}
+
+.meme--image {
+  border-radius: 3px;
+  width:100%;
+}
+
+.meme--text {
+  position: absolute;
+  width: 80%;
+  text-align: center;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 15px 0;
+  padding: 0 5px;
+  font-family: impact, sans-serif;
+  font-size: 2em;
+  text-transform: uppercase;
+  color: white;
+  letter-spacing: 1px;
+  text-shadow:
+      2px 2px 0 #000,
+      -2px -2px 0 #000,
+      2px -2px 0 #000,
+      -2px 2px 0 #000,
+      0 2px 0 #000,
+      2px 0 0 #000,
+      0 -2px 0 #000,
+      -2px 0 0 #000,
+      2px 2px 5px #000;
+}
+
+.bottom {
+  bottom: 0;
+}
+
+.top {
+  top: 0;
+}
